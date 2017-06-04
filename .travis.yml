@@ -4,7 +4,7 @@ services:
   - docker
 
 script:
-  - docker build -t thomasjpfan/ubuntu-python3-systemd:$$TRAVIS_BRANCH .
+  - docker build -t thomasjpfan/ubuntu-python3-systemd:$TRAVIS_BRANCH .
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
