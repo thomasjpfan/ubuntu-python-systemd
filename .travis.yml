@@ -1,0 +1,14 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - docker build -t thomasjpfan/ubuntu-python3-systemd:$$TRAVIS_BRANCH .
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker tag $TRAVIS_REPO_SLUG:$TRAVIS_BRANCH $TRAVIS_REPO_SLUG:16.04;
+    docker push $TRAVIS_REPO_SLUG:16.04;
+    fi
