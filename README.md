@@ -1,8 +1,8 @@
 # thomasjpfan/ubuntu-python-systemd
 
-[![Build Status](https://travis-ci.org/thomasjpfan/ubuntu-python-systemd.svg?branch=master)](https://travis-ci.org/thomasjpfan/ubuntu-python3-systemd)
+[![Build Status](https://travis-ci.org/thomasjpfan/ubuntu-python-systemd.svg?branch=master)](https://travis-ci.org/thomasjpfan/ubuntu-python-systemd)
 
-Based on [solita/docker-systemd](https://github.com/solita/docker-systemd), which runs `systemd`. This Docker image installs python3 to the image to provide ansible-playbook testing.
+Based on [solita/docker-systemd](https://github.com/solita/docker-systemd), which runs `systemd`. This Docker image installs python to the image to provide ansible-playbook testing.
 
 The `solita/docker-systemd` image solves the PID 1 zombie reaping problem in docker, and properly handles kill signals.
 
