@@ -1,6 +1,6 @@
 # thomasjpfan/ubuntu-python-systemd
 
-[![Build Status](https://travis-ci.org/thomasjpfan/ubuntu-python3-systemd.svg?branch=master)](https://travis-ci.org/thomasjpfan/ubuntu-python3-systemd)
+[![Build Status](https://travis-ci.org/thomasjpfan/ubuntu-python-systemd.svg?branch=master)](https://travis-ci.org/thomasjpfan/ubuntu-python3-systemd)
 
 Based on [solita/docker-systemd](https://github.com/solita/docker-systemd), which runs `systemd`. This Docker image installs python3 to the image to provide ansible-playbook testing.
 
