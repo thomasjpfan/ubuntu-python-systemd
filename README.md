@@ -1,6 +1,6 @@
 # thomasjpfan/ubuntu-python-systemd
 
-[![Build Status](https://travis-ci.org/thomasjpfan/ubuntu-python-systemd.svg?branch=master)](https://travis-ci.org/thomasjpfan/ubuntu-python-systemd)
+[![CircleCI](https://circleci.com/gh/thomasjpfan/ubuntu-python-systemd/tree/master.svg?style=svg)](https://circleci.com/gh/thomasjpfan/ubuntu-python-systemd/tree/master)
 
 Based on [solita/docker-systemd](https://github.com/solita/docker-systemd), which runs `systemd`. This Docker image installs python to the image to provide ansible-playbook testing.
 
