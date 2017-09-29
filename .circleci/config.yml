@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:17.09.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker image
+          command: |
+            docker build -t thomasjpfan/ubuntu-python-systemd:master .
+      - deploy:
+          name: Push to Docker Hub
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
+              docker tag thomasjpfan/ubuntu-python-systemd:master thomasjpfan/ubuntu-python-systemd:latest
+              docker push thomasjpfan/ubuntu-python-systemd:lastest
+            fi
