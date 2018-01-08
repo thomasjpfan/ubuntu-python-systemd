@@ -14,6 +14,7 @@ RUN systemctl set-default multi-user.target
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+    software-properties-common \
     python sudo bash ca-certificates iproute2 && \
     rm -Rf /var/lib/apt/lists/* && \
     rm -Rf /usr/share/doc && rm -Rf /usr/share/man && \
