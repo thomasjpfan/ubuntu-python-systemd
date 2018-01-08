@@ -7,5 +7,7 @@ Based on [solita/docker-systemd](https://github.com/solita/docker-systemd), whic
 ## Running
 
 ```bash
-docker run -d --name systemd --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro thomasjpfan/ubuntu-python-systemd
+docker run -d --rm --name systemd --privileged \
+    -v /sys/fs/cgroup:/sys/fs/cgroup:ro -t \
+    thomasjpfan/ubuntu-python-systemd
 ```
