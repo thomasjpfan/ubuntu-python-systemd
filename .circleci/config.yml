@@ -1,20 +1,41 @@
 version: 2
 jobs:
-  build:
+  py2:
     docker:
-      - image: docker:17.09.0-ce-git
+      - image: docker:17.12.0-ce-git
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: Build Docker image
-          command: |
-            docker build -t thomasjpfan/ubuntu-python-systemd:master .
-      - deploy:
+          command: docker build -t thomasjpfan/ubuntu-python-systemd:16.04-py2 .
+      - run:
           name: Push to Docker Hub
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
-              docker tag thomasjpfan/ubuntu-python-systemd:master thomasjpfan/ubuntu-python-systemd:latest
-              docker push thomasjpfan/ubuntu-python-systemd:latest
+              docker push thomasjpfan/ubuntu-python-systemd:16.04-py2
             fi
+  py3:
+    docker:
+      - image: docker:17.12.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker image
+          command: docker build -t thomasjpfan/ubuntu-python-systemd:16.04-py3 .
+      - run:
+          name: Push to Docker Hub
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
+              docker push thomasjpfan/ubuntu-python-systemd:16.04-py3
+            fi
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - py2
+      - py3

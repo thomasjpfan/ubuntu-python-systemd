@@ -6,6 +6,16 @@ Based on [solita/docker-systemd](https://github.com/solita/docker-systemd), whic
 
 ## Running
 
+For python 2 use:
+
+```bash
+docker run -d --rm --name systemd --privileged \
+    -v /sys/fs/cgroup:/sys/fs/cgroup:ro -t \
+    thomasjpfan/ubuntu-python-systemd:16.04-py2
+```
+
+For python 3 use:
+
 ```bash
 docker run -d --rm --name systemd --privileged \
     -v /sys/fs/cgroup:/sys/fs/cgroup:ro -t \
