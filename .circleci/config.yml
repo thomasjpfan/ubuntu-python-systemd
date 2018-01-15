@@ -8,7 +8,9 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build Docker image
-          command: docker build -t thomasjpfan/ubuntu-python-systemd:16.04-py2 .
+          command: >
+            docker build -t thomasjpfan/ubuntu-python-systemd:16.04-py2
+            -f py2/Dockerfile .
       - run:
           name: Push to Docker Hub
           command: |
@@ -24,7 +26,9 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build Docker image
-          command: docker build -t thomasjpfan/ubuntu-python-systemd:16.04-py3 .
+          command: >
+            docker build -t thomasjpfan/ubuntu-python-systemd:16.04-py3
+            -f py3/Dockerfile .
       - run:
           name: Push to Docker Hub
           command: |
@@ -35,7 +39,7 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  build-both:
     jobs:
       - py2
       - py3
