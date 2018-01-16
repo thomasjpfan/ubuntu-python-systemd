@@ -3,7 +3,7 @@ build_push: &build_push
     - run:
         name: Build Docker Image
         command: |
-          docker build -t $DOCKER_REPO:$CIRCLE_BRANCH -f py$PY_VERSION/Dockerfile .
+          docker build -t $DOCKER_REPO:$CIRCLE_BRANCH -f python$PY_VERSION/Dockerfile .
     - run:
         name: Push to Docker Hub
         command: |
