@@ -1,40 +1,61 @@
 build_push: &build_push
   steps:
     - checkout
-    - setup_remote_docker
+    - setup_remote_docker:
+        version: 17.09.0-ce
     - run:
         name: Build Docker Image
         command: |
-          docker build -t $DOCKER_REPO:$CIRCLE_BRANCH -f python$PY_VERSION/Dockerfile .
+          docker build -t $DOCKER_REPO:$CIRCLE_BRANCH -f python$PY_VERSION/Dockerfile.$UBUNTU_VERSION .
     - run:
         name: Push to Docker Hub
         command: |
           if [ "${CIRCLE_BRANCH}" == "master" ]; then
             docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
-            docker tag $DOCKER_REPO:$CIRCLE_BRANCH $DOCKER_REPO:16.04-py$PY_VERSION
-            docker push $DOCKER_REPO:16.04-py$PY_VERSION
+            docker tag $DOCKER_REPO:$CIRCLE_BRANCH $DOCKER_REPO:$UBUNTU_VERSION-py$PY_VERSION
+            docker push $DOCKER_REPO:$UBUNTU_VERSION-py$PY_VERSION
           fi
 
 version: 2
 jobs:
-  py2:
+  py2-16.04:
     docker:
-      - image: docker:17.12.0-ce-git
+      - image: docker:18.06.0-ce-git
     environment:
       - DOCKER_REPO: thomasjpfan/ubuntu-python-systemd
       - PY_VERSION: 2
+      - UBUNTU_VERSION: 16.04
     <<: *build_push
-  py3:
+  py2-18.04:
     docker:
-      - image: docker:17.12.0-ce-git
+      - image: docker:18.06.0-ce-git
+    environment:
+      - DOCKER_REPO: thomasjpfan/ubuntu-python-systemd
+      - PY_VERSION: 2
+      - UBUNTU_VERSION: 18.04
+    <<: *build_push
+  py3-16.04:
+    docker:
+      - image: docker:18.06.0-ce-git
     environment:
       - DOCKER_REPO: thomasjpfan/ubuntu-python-systemd
       - PY_VERSION: 3
+      - UBUNTU_VERSION: 16.04
+    <<: *build_push
+  py3-18.04:
+    docker:
+      - image: docker:18.06.0-ce-git
+    environment:
+      - DOCKER_REPO: thomasjpfan/ubuntu-python-systemd
+      - PY_VERSION: 3
+      - UBUNTU_VERSION: 18.04
     <<: *build_push
 
 workflows:
   version: 2
   build-both:
     jobs:
-      - py2
-      - py3
+      - py2-16.04
+      - py2-18.04
+      - py3-16.04
+      - py3-18.04
