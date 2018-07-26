@@ -10,14 +10,14 @@ RUN find /etc/systemd/system \
     -not -name '*systemd-user-sessions*' \
     -exec rm \{} \;
 
-RUN systemctl set-default multi-user.target
-
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    python3 sudo bash ca-certificates iproute2 && \
+    python3 dbus sudo bash ca-certificates iproute2 systemd && \
     rm -Rf /var/lib/apt/lists/* && \
     rm -Rf /usr/share/doc && rm -Rf /usr/share/man && \
     apt-get clean
+
+RUN systemctl set-default multi-user.target
 
 STOPSIGNAL SIGRTMIN+3
 
